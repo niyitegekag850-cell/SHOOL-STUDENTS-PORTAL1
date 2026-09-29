@@ -1,96 +1,1784 @@
 <!DOCTYPE html>
-<html lang="rw">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Register - learn mathematics online</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduPulse - Professional School Management System</title>
+    <style>
+        /* Modern Color Palette & Design Tokens */
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --primary-light: #eff6ff;
+            --secondary: #64748b;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --info: #06b6d4;
+            --bg-main: #f8fafc;
+            --bg-card: #ffffff;
+            --border: #e2e8f0;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            --sidebar-width: 260px;
+            --sidebar-collapsed-width: 70px;
+            --header-height: 64px;
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, sans-serif;
-}
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
 
-body{
-    background:linear-gradient(135deg,#007BFF,#c300ff);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-}
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
 
-.container{
-    background:greenyellow;
-    padding:30px;
-    width:350px;
-    border-radius:12px;
-    box-shadow:0 0 15px rgba(0, 0, 0, 0.2);
-}
+        /* SVG Icon Sizing */
+        .icon {
+            width: 20px;
+            height: 20px;
+            stroke-width: 2;
+            stroke: currentColor;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            display: inline-block;
+            vertical-align: middle;
+        }
 
-h2{
-    text-align:center;
-    margin-bottom:20px;
-    color:#007BFF;
-}
+        /* Login Screen Layout */
+        #login-screen {
+            display: flex;
+            min-height: 100vh;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #3b82f6 100%);
+            padding: 20px;
+        }
 
-input{
-    width:100%;
-    padding:12px;
-    margin:8px 0;
-    border:1px solid hwb(0 80% 20%);
-    border-radius:6px;
-}
+        .login-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            width: 100%;
+            max-width: 440px;
+            padding: 40px;
+            text-align: center;
+        }
 
-button{
-    width:100%;
-    padding:12px;
-    background:#007BFF;
-    color:rgb(255, 255, 255);
-    border:none;
-    border-radius:6px;
-    cursor:pointer;
-    font-size:16px;
-}
+        .login-header {
+            margin-bottom: 28px;
+        }
 
-button:hover{
-    background:#8900b3;
-}
+        .login-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
 
-p{
-    text-align:center;
-    margin-top:15px;
-}
+        .login-logo svg {
+            width: 42px;
+            height: 42px;
+            color: var(--primary);
+        }
 
-a{
-    color:#007BFF;
-    text-decoration:none;
-}
-</style>
+        .login-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
 
+        .login-subtitle {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .security-notice {
+            background-color: #fffbebf8;
+            border: 1px solid #fef3c7;
+            color: #92400e;
+            padding: 10px 14px;
+            border-radius: var(--radius-md);
+            font-size: 12px;
+            margin-bottom: 20px;
+            text-align: left;
+            line-height: 1.4;
+        }
+
+        /* Form Controls */
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+
+        .input-group {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px 14px;
+            font-size: 14px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            outline: none;
+            transition: var(--transition);
+            background-color: #fff;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+        }
+
+        .pwd-toggle {
+            position: absolute;
+            right: 12px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 18px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: var(--radius-md);
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .btn-primary { background: var(--primary); color: #fff; }
+        .btn-primary:hover { background: var(--primary-hover); }
+        .btn-secondary { background: #e2e8f0; color: var(--text-dark); }
+        .btn-secondary:hover { background: #cbd5e1; }
+        .btn-danger { background: var(--danger); color: #fff; }
+        .btn-danger:hover { background: #dc2626; }
+        .btn-success { background: var(--success); color: #fff; }
+        .btn-success:hover { background: #059669; }
+        .btn-block { width: 100%; }
+        .btn-sm { padding: 6px 12px; font-size: 12px; }
+
+        /* App Layout */
+        #app-screen {
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Sidebar Styling */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: #0f172a;
+            color: #94a3b8;
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+            z-index: 30;
+            flex-shrink: 0;
+        }
+
+        .sidebar.collapsed {
+            width: var(--sidebar-collapsed-width);
+        }
+
+        .sidebar-brand {
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            border-bottom: 1px solid #1e293b;
+            gap: 12px;
+            color: #fff;
+            font-weight: 700;
+            font-size: 18px;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .sidebar-brand svg {
+            color: var(--primary);
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
+        }
+
+        .sidebar-menu {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px 10px;
+            list-style: none;
+        }
+
+        .menu-item {
+            margin-bottom: 4px;
+        }
+
+        .menu-link {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 10px 14px;
+            color: #94a3b8;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: var(--transition);
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+        .menu-link:hover, .menu-link.active {
+            background-color: #1e293b;
+            color: #fff;
+        }
+
+        .menu-link.active svg {
+            color: var(--primary);
+        }
+
+        /* Main Content Layout */
+        .main-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Top Header Navigation */
+        .navbar {
+            height: var(--header-height);
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            z-index: 20;
+        }
+
+        .navbar-left, .navbar-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .sidebar-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-muted);
+            padding: 6px;
+            border-radius: var(--radius-sm);
+        }
+
+        .sidebar-toggle:hover {
+            background-color: var(--bg-main);
+        }
+
+        .search-box {
+            position: relative;
+            width: 260px;
+        }
+
+        .search-box input {
+            padding-left: 36px;
+        }
+
+        .search-box svg {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .nav-icon-btn {
+            position: relative;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-muted);
+            padding: 8px;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .nav-icon-btn:hover {
+            background: var(--bg-main);
+            color: var(--text-dark);
+        }
+
+        .badge {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            background: var(--danger);
+            color: white;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 5px;
+            border-radius: 10px;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: var(--radius-md);
+        }
+
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .user-info {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .user-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .user-role {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: capitalize;
+        }
+
+        /* Dashboard Content Container */
+        .content-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px;
+        }
+
+        .page-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+        }
+
+        .page-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        /* Stats Cards Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .stat-info h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .stat-info p {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* Charts & Dashboard Section */
+        .dashboard-charts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        canvas {
+            width: 100% !important;
+            max-height: 240px;
+        }
+
+        /* Modern Tables */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        .table th {
+            background-color: var(--bg-main);
+            color: var(--text-muted);
+            font-weight: 600;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            white-space: nowrap;
+        }
+
+        .table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-dark);
+            vertical-align: middle;
+        }
+
+        .table tbody tr:hover {
+            background-color: var(--primary-light);
+        }
+
+        .status-pill {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: capitalize;
+        }
+
+        .status-active, .status-present { background: #dcfce7; color: #15803d; }
+        .status-inactive, .status-absent { background: #fee2e2; color: #b91c1c; }
+        .status-late { background: #fef3c7; color: #b45309; }
+        .status-excused { background: #e0f2fe; color: #0369a1; }
+
+        /* Modal Dialogs */
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(15, 23, 42, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+
+        .modal-backdrop.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow-lg);
+            transform: translateY(20px);
+            transition: var(--transition);
+        }
+
+        .modal-backdrop.active .modal {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-muted);
+            font-size: 20px;
+        }
+
+        .modal-body {
+            padding: 24px;
+        }
+
+        .modal-footer {
+            padding: 16px 24px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        /* Toast Notifications */
+        .toast-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 200;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .toast {
+            background: var(--text-dark);
+            color: white;
+            padding: 12px 18px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+
+        /* Print CSS Override */
+        @media print {
+            .sidebar, .navbar, .btn, .modal-backdrop, .no-print {
+                display: none !important;
+            }
+            body, #app-screen, .main-wrapper, .content-container {
+                overflow: visible !important;
+                height: auto !important;
+                background: #fff !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+            .card {
+                border: none !important;
+                box-shadow: none !important;
+            }
+            .printable-area {
+                display: block !important;
+                width: 100%;
+            }
+        }
+
+        /* Responsive Design Rules */
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                left: -100%;
+                height: 100%;
+            }
+            .sidebar.mobile-open {
+                left: 0;
+            }
+            .search-box {
+                display: none;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<div class="container">
+    <!-- LOGIN SCREEN -->
+    <div id="login-screen">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="login-logo">
+                    <svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>
+                    <span class="login-title">EduPulse</span>
+                </div>
+                <p class="login-subtitle">School Management System</p>
+            </div>
 
-<h2>Register</h2>
+            <div class="security-notice">
+                <strong>Notice:</strong> Local Storage authentication is designed for local demonstration/use only and is not secure for public production environments.
+            </div>
 
-<form action="register.html" method="GET">
-    <input type="text" name="names" placeholder="Insert your names" required>
+            <form id="login-form">
+                <div class="form-group">
+                    <label class="form-label">Username</label>
+                    <input type="text" id="login-username" class="form-control" placeholder="Enter username" required value="admin">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <div class="input-group">
+                        <input type="password" id="login-password" class="form-control" placeholder="Enter password" required value="admin123">
+                        <button type="button" class="pwd-toggle" onclick="togglePasswordVisibility('login-password')">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                        </button>
+                    </div>
+                </div>
+                <div id="login-error" style="color: var(--danger); font-size: 13px; margin-bottom: 12px; display: none;">Invalid username or password</div>
+                <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+            </form>
+            <div style="margin-top: 15px; font-size: 12px; color: var(--text-muted);">
+                Default credentials: <strong>admin</strong> / <strong>admin123</strong>
+            </div>
+        </div>
+    </div>
 
-    <input type="email" name="email" placeholder="type your e-mail" required>
+    <!-- MAIN APP SCREEN -->
+    <div id="app-screen" style="display: none;">
+        <!-- SIDEBAR -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-brand">
+                <svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>
+                <span id="brand-name">EduPulse</span>
+            </div>
+            <ul class="sidebar-menu">
+                <li class="menu-item"><a class="menu-link active" data-view="dashboard"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg><span>Dashboard</span></a></li>
+                <li class="menu-item"><a class="menu-link" data-view="students"><svg class="icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>Students</span></a></li>
+                <li class="menu-item"><a class="menu-link" data-view="teachers"><svg class="icon" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>Teachers</span></a></li>
+                <li class="menu-item"><a class="menu-link" data-view="classes"><svg class="icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span>Classes</span></a></li>
+                <li class="menu-item"><a class="menu-link" data-view="subjects"><svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg><span>Subjects</span></a></li>
+                <li class="menu-item"><a class="menu-link" data-view="attendance"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span>Attendance</span></a></li>
+                <li class="menu-item"><a class="menu-link" data-view="exams"><svg class="icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg><span>Examinations</span></a></li>
+                <li class="menu-item"><a class="menu-link" data-view="fees"><svg class="icon" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg><span>Fees & Finance</span></a></li>
+                <li class="menu-item"><a class="menu-link" data-view="users"><svg class="icon" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg><span>User Mgmt</span></a></li>
+                <li class="menu-item"><a class="menu-link" data-view="reports"><svg class="icon" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg><span>Reports</span></a></li>
+                <li class="menu-item"><a class="menu-link" data-view="settings"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg><span>Settings</span></a></li>
+            </ul>
+        </aside>
 
-    <input type="password" name="password" placeholder="Insert your password" required>
+        <div class="main-wrapper">
+            <!-- TOP NAVBAR -->
+            <header class="navbar">
+                <div class="navbar-left">
+                    <button class="sidebar-toggle" id="sidebar-toggle">
+                        <svg class="icon" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                    </button>
+                    <div class="search-box">
+                        <svg class="icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        <input type="text" class="form-control" id="global-search" placeholder="Search modules...">
+                    </div>
+                </div>
+                <div class="navbar-right">
+                    <button class="nav-icon-btn" id="notif-btn" onclick="toggleNotifications()">
+                        <svg class="icon" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                        <span class="badge" id="notif-badge" style="display: none;">0</span>
+                    </button>
+                    <div class="user-profile" onclick="logout()">
+                        <div class="user-avatar" id="header-avatar">A</div>
+                        <div class="user-info">
+                            <span class="user-name" id="header-user-name">Administrator</span>
+                            <span class="user-role" id="header-user-role">admin</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
 
-    <input type="password" name="confirm" placeholder="Confirm your password" required>
+            <!-- MAIN CONTENT AREA -->
+            <main class="content-container" id="content-container">
+                <!-- Views loaded dynamically -->
+            </main>
+        </div>
+    </div>
 
-    <button type="submit">Register</button>
-</form>
+    <!-- MODAL CONTAINER -->
+    <div class="modal-backdrop" id="modal-backdrop">
+        <div class="modal" id="modal">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-title">Modal Title</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-body"></div>
+        </div>
+    </div>
 
-<p>you have account? <a href="login.html">login here</a></p>
+    <!-- TOAST CONTAINER -->
+    <div class="toast-container" id="toast-container"></div>
 
-</div>
+    <script>
+        /* CORE APPLICATION STATE & LOCAL STORAGE INITIALIZATION */
+        const DB_KEYS = {
+            USERS: 'sms_users',
+            STUDENTS: 'sms_students',
+            TEACHERS: 'sms_teachers',
+            CLASSES: 'sms_classes',
+            SUBJECTS: 'sms_subjects',
+            ATTENDANCE: 'sms_attendance',
+            EXAMS: 'sms_exams',
+            RESULTS: 'sms_results',
+            FEES: 'sms_fees',
+            PAYMENTS: 'sms_payments',
+            NOTIFS: 'sms_notifications',
+            SETTINGS: 'sms_settings',
+            CURRENT_USER: 'sms_current_user'
+        };
 
+        // Reusable LocalStorage helper
+        const DB = {
+            get: (key) => JSON.parse(localStorage.getItem(key)) || [],
+            set: (key, data) => localStorage.setItem(key, JSON.stringify(data)),
+            getObject: (key) => JSON.parse(localStorage.getItem(key)) || {},
+            generateId: () => '_' + Math.random().toString(36).substr(2, 9)
+        };
+
+        // Initialize Sample Data
+        function initSampleData() {
+            if (!localStorage.getItem(DB_KEYS.SETTINGS)) {
+                DB.set(DB_KEYS.SETTINGS, {
+                    schoolName: "EduPulse Academy",
+                    address: "123 Education Lane, Knowledge City",
+                    phone: "+1 800-555-0199",
+                    email: "info@edupulse.edu",
+                    academicYear: "2026",
+                    currentTerm: "Term 1",
+                    currency: "$",
+                    gradingScale: [
+                        { grade: "A", min: 80, max: 100 },
+                        { grade: "B", min: 70, max: 79 },
+                        { grade: "C", min: 60, max: 69 },
+                        { grade: "D", min: 50, max: 59 },
+                        { grade: "F", min: 0, max: 49 }
+                    ]
+                });
+            }
+
+            if (!localStorage.getItem(DB_KEYS.USERS)) {
+                DB.set(DB_KEYS.USERS, [
+                    { id: "u1", username: "admin", password: "123", name: "System Admin", role: "admin", status: "active" },
+                    { id: "u2", username: "teacher", password: "123", name: "Sarah Jenkins", role: "teacher", status: "active" },
+                    { id: "u3", username: "accountant", password: "123", name: "Mark Miller", role: "accountant", status: "active" },
+                    { id: "u4", username: "student", password: "123", name: "John Doe", role: "student", status: "active" }
+                ]);
+            }
+
+            if (!localStorage.getItem(DB_KEYS.CLASSES)) {
+                DB.set(DB_KEYS.CLASSES, [
+                    { id: "c1", name: "Grade 10", section: "A", year: "2026", teacher: "Sarah Jenkins", capacity: 40, fee: 1200 },
+                    { id: "c2", name: "Grade 10", section: "B", year: "2026", teacher: "Robert Davis", capacity: 35, fee: 1200 },
+                    { id: "c3", name: "Grade 11", section: "A", year: "2026", teacher: "Emily Stone", capacity: 40, fee: 1400 }
+                ]);
+            }
+
+            if (!localStorage.getItem(DB_KEYS.SUBJECTS)) {
+                DB.set(DB_KEYS.SUBJECTS, [
+                    { id: "s1", name: "Mathematics", code: "MATH10", class: "Grade 10", teacher: "Sarah Jenkins" },
+                    { id: "s2", name: "English Science", code: "ENG10", class: "Grade 10", teacher: "Robert Davis" },
+                    { id: "s3", name: "Physics", code: "PHY11", class: "Grade 11", teacher: "Emily Stone" }
+                ]);
+            }
+
+            if (!localStorage.getItem(DB_KEYS.STUDENTS)) {
+                DB.set(DB_KEYS.STUDENTS, [
+                    { id: "st1", admNo: "ADM001", name: "John Doe", gender: "Male", dob: "2008-05-14", class: "Grade 10", parent: "Michael Doe", phone: "555-0101", email: "john@example.com", status: "active" },
+                    { id: "st2", admNo: "ADM002", name: "Jane Smith", gender: "Female", dob: "2008-08-22", class: "Grade 10", parent: "David Smith", phone: "555-0102", email: "jane@example.com", status: "active" },
+                    { id: "st3", admNo: "ADM003", name: "Alice Johnson", gender: "Female", dob: "2007-03-10", class: "Grade 11", parent: "Chris Johnson", phone: "555-0103", email: "alice@example.com", status: "active" }
+                ]);
+            }
+
+            if (!localStorage.getItem(DB_KEYS.TEACHERS)) {
+                DB.set(DB_KEYS.TEACHERS, [
+                    { id: "t1", name: "Sarah Jenkins", gender: "Female", phone: "555-0201", email: "sarah@edupulse.edu", subject: "Mathematics", qualification: "M.Sc Mathematics", salary: 4500, status: "active" },
+                    { id: "t2", name: "Robert Davis", gender: "Male", phone: "555-0202", email: "robert@edupulse.edu", subject: "English Science", qualification: "B.Ed English", salary: 4000, status: "active" }
+                ]);
+            }
+
+            if (!localStorage.getItem(DB_KEYS.PAYMENTS)) {
+                DB.set(DB_KEYS.PAYMENTS, [
+                    { id: "p1", receiptNo: "REC1001", studentId: "st1", studentName: "John Doe", class: "Grade 10", amount: 600, date: "2026-01-15", method: "Bank Transfer" },
+                    { id: "p2", receiptNo: "REC1002", studentId: "st2", studentName: "Jane Smith", class: "Grade 10", amount: 1200, date: "2026-01-18", method: "Cash" }
+                ]);
+            }
+
+            if (!localStorage.getItem(DB_KEYS.NOTIFS)) {
+                DB.set(DB_KEYS.NOTIFS, [
+                    { id: "n1", message: "System initialized with sample data.", date: new Date().toLocaleDateString(), read: false }
+                ]);
+            }
+        }
+
+        /* AUTHENTICATION & NAV LOGIC */
+        let currentUser = null;
+
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const u = document.getElementById('login-username').value;
+            const p = document.getElementById('login-password').value;
+            const users = DB.get(DB_KEYS.USERS);
+            const user = users.find(x => x.username === u && x.password === p);
+
+            if (user) {
+                if (user.status !== 'active') {
+                    showToast("Account deactivated. Contact Admin.");
+                    return;
+                }
+                currentUser = user;
+                DB.set(DB_KEYS.CURRENT_USER, user);
+                document.getElementById('login-error').style.display = 'none';
+                loadAppScreen();
+            } else {
+                document.getElementById('login-error').style.display = 'block';
+            }
+        });
+
+        function logout() {
+            currentUser = null;
+            localStorage.removeItem(DB_KEYS.CURRENT_USER);
+            document.getElementById('app-screen').style.display = 'none';
+            document.getElementById('login-screen').style.display = 'flex';
+        }
+
+        function loadAppScreen() {
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('app-screen').style.display = 'flex';
+            
+            // Update Header User Profile
+            document.getElementById('header-user-name').innerText = currentUser.name;
+            document.getElementById('header-user-role').innerText = currentUser.role;
+            document.getElementById('header-avatar').innerText = currentUser.name.charAt(0).toUpperCase();
+
+            // Dynamic RBAC Sidebar Hiding
+            applyRBAC();
+            updateNotifBadge();
+            navigate('dashboard');
+        }
+
+        function applyRBAC() {
+            const role = currentUser.role;
+            const links = document.querySelectorAll('.menu-link');
+            links.forEach(link => {
+                const view = link.getAttribute('data-view');
+                if (role === 'teacher' && ['fees', 'users'].includes(view)) link.parentElement.style.display = 'none';
+                else if (role === 'accountant' && ['exams', 'teachers', 'attendance'].includes(view)) link.parentElement.style.display = 'none';
+                else if (role === 'student' && ['teachers', 'users', 'settings'].includes(view)) link.parentElement.style.display = 'none';
+                else link.parentElement.style.display = 'block';
+            });
+        }
+
+        /* NAVIGATION ROUTER */
+        document.querySelectorAll('.menu-link').forEach(link => {
+            link.addEventListener('click', function() {
+                document.querySelectorAll('.menu-link').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+                const view = this.getAttribute('data-view');
+                navigate(view);
+            });
+        });
+
+        function navigate(view) {
+            const container = document.getElementById('content-container');
+            container.innerHTML = '';
+
+            switch(view) {
+                case 'dashboard': renderDashboard(container); break;
+                case 'students': renderStudents(container); break;
+                case 'teachers': renderTeachers(container); break;
+                case 'classes': renderClasses(container); break;
+                case 'subjects': renderSubjects(container); break;
+                case 'attendance': renderAttendance(container); break;
+                case 'exams': renderExams(container); break;
+                case 'fees': renderFees(container); break;
+                case 'users': renderUsers(container); break;
+                case 'reports': renderReports(container); break;
+                case 'settings': renderSettings(container); break;
+                default: renderDashboard(container);
+            }
+        }
+
+        /* VIEW 1: DASHBOARD */
+        function renderDashboard(container) {
+            const students = DB.get(DB_KEYS.STUDENTS);
+            const teachers = DB.get(DB_KEYS.TEACHERS);
+            const classes = DB.get(DB_KEYS.CLASSES);
+            const payments = DB.get(DB_KEYS.PAYMENTS);
+            const settings = DB.getObject(DB_KEYS.SETTINGS);
+
+            const totalFeesCollected = payments.reduce((sum, p) => sum + Number(p.amount), 0);
+
+            container.innerHTML = `
+                <div class="page-header">
+                    <h2 class="page-title">Dashboard Overview</h2>
+                    <span style="font-size: 13px; color: var(--text-muted);">Term: ${settings.currentTerm || 'Term 1'} | Year: ${settings.academicYear || '2026'}</span>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background:#eff6ff; color:#2563eb;"><svg class="icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+                        <div class="stat-info"><h3>${students.length}</h3><p>Total Students</p></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background:#f0fdf4; color:#16a34a;"><svg class="icon" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+                        <div class="stat-info"><h3>${teachers.length}</h3><p>Total Teachers</p></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background:#fefce8; color:#ca8a04;"><svg class="icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
+                        <div class="stat-info"><h3>${classes.length}</h3><p>Active Classes</p></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background:#f3e8ff; color:#9333ea;"><svg class="icon" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+                        <div class="stat-info"><h3>${settings.currency || '$'}${totalFeesCollected}</h3><p>Fees Collected</p></div>
+                    </div>
+                </div>
+
+                <div class="dashboard-charts">
+                    <div class="card">
+                        <div class="card-header"><span class="card-title">Enrollment Overview</span></div>
+                        <canvas id="enrollmentChart"></canvas>
+                    </div>
+                    <div class="card">
+                        <div class="card-header"><span class="card-title">Fee Collections</span></div>
+                        <canvas id="financeChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header"><span class="card-title">Recent Student Registrations</span></div>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr><th>Adm No</th><th>Name</th><th>Class</th><th>Gender</th><th>Status</th></tr>
+                            </thead>
+                            <tbody>
+                                ${students.slice(-5).reverse().map(s => `
+                                    <tr>
+                                        <td>${s.admNo}</td>
+                                        <td>${s.name}</td>
+                                        <td>${s.class}</td>
+                                        <td>${s.gender}</td>
+                                        <td><span class="status-pill status-${s.status}">${s.status}</span></td>
+                                    </tr>
+                                `).join('') || '<tr><td colspan="5">No records found</td></tr>'}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+
+            drawCharts();
+        }
+
+        /* CUSTOM CANVAS CHARTS */
+        function drawCharts() {
+            // Simple Pure Canvas Bar Chart for Enrollment
+            const c1 = document.getElementById('enrollmentChart');
+            if (c1) {
+                const ctx = c1.getContext('2d');
+                c1.width = c1.parentElement.clientWidth - 40;
+                c1.height = 200;
+                ctx.fillStyle = '#2563eb';
+                ctx.fillRect(40, 40, 40, 120);
+                ctx.fillRect(120, 70, 40, 90);
+                ctx.fillRect(200, 20, 40, 140);
+                ctx.fillStyle = '#64748b';
+                ctx.font = '12px Inter';
+                ctx.fillText('Gr 9', 45, 180);
+                ctx.fillText('Gr 10', 125, 180);
+                ctx.fillText('Gr 11', 205, 180);
+            }
+
+            // Canvas Line Chart for Finance
+            const c2 = document.getElementById('financeChart');
+            if (c2) {
+                const ctx = c2.getContext('2d');
+                c2.width = c2.parentElement.clientWidth - 40;
+                c2.height = 200;
+                ctx.beginPath();
+                ctx.strokeStyle = '#10b981';
+                ctx.lineWidth = 3;
+                ctx.moveTo(30, 140);
+                ctx.lineTo(100, 90);
+                ctx.lineTo(170, 110);
+                ctx.lineTo(240, 40);
+                ctx.stroke();
+            }
+        }
+
+        /* VIEW 2: STUDENT MANAGEMENT */
+        function renderStudents(container) {
+            const students = DB.get(DB_KEYS.STUDENTS);
+            const classes = DB.get(DB_KEYS.CLASSES);
+
+            container.innerHTML = `
+                <div class="page-header">
+                    <h2 class="page-title">Student Directory</h2>
+                    <div style="display:flex; gap:10px;">
+                        <button class="btn btn-secondary btn-sm" onclick="exportCSV('students')">Export CSV</button>
+                        <button class="btn btn-primary btn-sm" onclick="openStudentModal()">+ Add Student</button>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-bottom: 20px;">
+                    <div class="form-row">
+                        <div class="form-group" style="margin:0;">
+                            <input type="text" id="student-search" class="form-control" placeholder="Search name or ID..." onkeyup="filterStudents()">
+                        </div>
+                        <div class="form-group" style="margin:0;">
+                            <select id="student-class-filter" class="form-control" onchange="filterStudents()">
+                                <option value="">All Classes</option>
+                                ${classes.map(c => `<option value="${c.name}">${c.name}</option>`).join('')}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="table-responsive">
+                        <table class="table" id="student-table">
+                            <thead>
+                                <tr><th>Adm No</th><th>Name</th><th>Class</th><th>Gender</th><th>Parent Phone</th><th>Status</th><th>Actions</th></tr>
+                            </thead>
+                            <tbody id="student-table-body">
+                                ${renderStudentRows(students)}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderStudentRows(students) {
+            if (!students.length) return '<tr><td colspan="7">No students registered yet.</td></tr>';
+            return students.map(s => `
+                <tr>
+                    <td><b>${s.admNo}</b></td>
+                    <td>${s.name}</td>
+                    <td>${s.class}</td>
+                    <td>${s.gender}</td>
+                    <td>${s.phone || 'N/A'}</td>
+                    <td><span class="status-pill status-${s.status}">${s.status}</span></td>
+                    <td>
+                        <button class="btn btn-secondary btn-sm" onclick="editStudent('${s.id}')">Edit</button>
+                        <button class="btn btn-danger btn-sm" onclick="deleteStudent('${s.id}')">Delete</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function filterStudents() {
+            const query = document.getElementById('student-search').value.toLowerCase();
+            const cls = document.getElementById('student-class-filter').value;
+            let students = DB.get(DB_KEYS.STUDENTS);
+
+            students = students.filter(s => {
+                const matchesQuery = s.name.toLowerCase().includes(query) || s.admNo.toLowerCase().includes(query);
+                const matchesClass = cls === '' || s.class === cls;
+                return matchesQuery && matchesClass;
+            });
+
+            document.getElementById('student-table-body').innerHTML = renderStudentRows(students);
+        }
+
+        function openStudentModal(studentId = null) {
+            const classes = DB.get(DB_KEYS.CLASSES);
+            let s = { admNo: 'ADM' + Math.floor(1000 + Math.random() * 9000), name: '', gender: 'Male', dob: '', class: classes[0]?.name || '', parent: '', phone: '', email: '', status: 'active' };
+            
+            if (studentId) {
+                s = DB.get(DB_KEYS.STUDENTS).find(x => x.id === studentId);
+            }
+
+            openModal(studentId ? 'Edit Student' : 'Add New Student', `
+                <form id="student-form" onsubmit="saveStudent(event, '${studentId || ''}')">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Admission No</label>
+                            <input type="text" class="form-control" id="m-admNo" value="${s.admNo}" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="m-name" value="${s.name}" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Gender</label>
+                            <select class="form-control" id="m-gender">
+                                <option value="Male" ${s.gender==='Male'?'selected':''}>Male</option>
+                                <option value="Female" ${s.gender==='Female'?'selected':''}>Female</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Class</label>
+                            <select class="form-control" id="m-class">
+                                ${classes.map(c => `<option value="${c.name}" ${s.class===c.name?'selected':''}>${c.name}</option>`).join('')}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Parent/Guardian Name</label>
+                            <input type="text" class="form-control" id="m-parent" value="${s.parent}">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Parent Phone</label>
+                            <input type="text" class="form-control" id="m-phone" value="${s.phone}">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Save Student</button>
+                </form>
+            `);
+        }
+
+        function saveStudent(e, id) {
+            e.preventDefault();
+            let students = DB.get(DB_KEYS.STUDENTS);
+            const studentData = {
+                id: id || DB.generateId(),
+                admNo: document.getElementById('m-admNo').value,
+                name: document.getElementById('m-name').value,
+                gender: document.getElementById('m-gender').value,
+                class: document.getElementById('m-class').value,
+                parent: document.getElementById('m-parent').value,
+                phone: document.getElementById('m-phone').value,
+                status: 'active'
+            };
+
+            if (id) {
+                students = students.map(x => x.id === id ? studentData : x);
+            } else {
+                students.push(studentData);
+                addNotification(`New Student registered: ${studentData.name}`);
+            }
+
+            DB.set(DB_KEYS.STUDENTS, students);
+            closeModal();
+            showToast("Student profile saved successfully.");
+            navigate('students');
+        }
+
+        function deleteStudent(id) {
+            if (confirm("Are you sure you want to delete this student record?")) {
+                let students = DB.get(DB_KEYS.STUDENTS);
+                students = students.filter(s => s.id !== id);
+                DB.set(DB_KEYS.STUDENTS, students);
+                showToast("Student deleted.");
+                navigate('students');
+            }
+        }
+
+        /* VIEW 3: TEACHERS */
+        function renderTeachers(container) {
+            const teachers = DB.get(DB_KEYS.TEACHERS);
+            container.innerHTML = `
+                <div class="page-header">
+                    <h2 class="page-title">Teachers List</h2>
+                    <button class="btn btn-primary btn-sm" onclick="openTeacherModal()">+ Add Teacher</button>
+                </div>
+                <div class="card">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead><tr><th>Name</th><th>Subject</th><th>Qualification</th><th>Phone</th><th>Salary</th><th>Actions</th></tr></thead>
+                            <tbody>
+                                ${teachers.map(t => `
+                                    <tr>
+                                        <td><b>${t.name}</b></td>
+                                        <td>${t.subject}</td>
+                                        <td>${t.qualification}</td>
+                                        <td>${t.phone}</td>
+                                        <td>$${t.salary}</td>
+                                        <td><button class="btn btn-danger btn-sm" onclick="deleteTeacher('${t.id}')">Delete</button></td>
+                                    </tr>
+                                `).join('') || '<tr><td colspan="6">No teachers found.</td></tr>'}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+        }
+
+        function openTeacherModal() {
+            openModal('Add Teacher', `
+                <form onsubmit="saveTeacher(event)">
+                    <div class="form-group"><label class="form-label">Full Name</label><input id="t-name" class="form-control" required></div>
+                    <div class="form-group"><label class="form-label">Subject</label><input id="t-subject" class="form-control" required></div>
+                    <div class="form-group"><label class="form-label">Qualification</label><input id="t-qual" class="form-control"></div>
+                    <div class="form-group"><label class="form-label">Salary</label><input type="number" id="t-salary" class="form-control" required></div>
+                    <button class="btn btn-primary btn-block">Save Teacher</button>
+                </form>
+            `);
+        }
+
+        function saveTeacher(e) {
+            e.preventDefault();
+            const teachers = DB.get(DB_KEYS.TEACHERS);
+            teachers.push({
+                id: DB.generateId(),
+                name: document.getElementById('t-name').value,
+                subject: document.getElementById('t-subject').value,
+                qualification: document.getElementById('t-qual').value,
+                salary: document.getElementById('t-salary').value,
+                status: 'active'
+            });
+            DB.set(DB_KEYS.TEACHERS, teachers);
+            closeModal();
+            navigate('teachers');
+        }
+
+        function deleteTeacher(id) {
+            if (confirm("Delete this teacher record?")) {
+                DB.set(DB_KEYS.TEACHERS, DB.get(DB_KEYS.TEACHERS).filter(x => x.id !== id));
+                navigate('teachers');
+            }
+        }
+
+        /* VIEW 4: CLASSES */
+        function renderClasses(container) {
+            const classes = DB.get(DB_KEYS.CLASSES);
+            container.innerHTML = `
+                <div class="page-header">
+                    <h2 class="page-title">Class Management</h2>
+                    <button class="btn btn-primary btn-sm" onclick="openClassModal()">+ Add Class</button>
+                </div>
+                <div class="card">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead><tr><th>Class Name</th><th>Section</th><th>Class Teacher</th><th>Term Fee</th><th>Capacity</th></tr></thead>
+                            <tbody>
+                                ${classes.map(c => `
+                                    <tr>
+                                        <td><b>${c.name}</b></td>
+                                        <td>${c.section}</td>
+                                        <td>${c.teacher}</td>
+                                        <td>$${c.fee}</td>
+                                        <td>${c.capacity} Students</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+        }
+
+        function openClassModal() {
+            openModal('Add Class', `
+                <form onsubmit="saveClass(event)">
+                    <div class="form-group"><label class="form-label">Class Name</label><input id="c-name" class="form-control" placeholder="e.g. Grade 10" required></div>
+                    <div class="form-group"><label class="form-label">Section</label><input id="c-sec" class="form-control" placeholder="e.g. A" required></div>
+                    <div class="form-group"><label class="form-label">Class Fee</label><input type="number" id="c-fee" class="form-control" required></div>
+                    <button class="btn btn-primary btn-block">Save Class</button>
+                </form>
+            `);
+        }
+
+        function saveClass(e) {
+            e.preventDefault();
+            const classes = DB.get(DB_KEYS.CLASSES);
+            classes.push({
+                id: DB.generateId(),
+                name: document.getElementById('c-name').value,
+                section: document.getElementById('c-sec').value,
+                fee: document.getElementById('c-fee').value,
+                teacher: 'Unassigned',
+                capacity: 40
+            });
+            DB.set(DB_KEYS.CLASSES, classes);
+            closeModal();
+            navigate('classes');
+        }
+
+        /* VIEW 5: SUBJECTS */
+        function renderSubjects(container) {
+            const subjects = DB.get(DB_KEYS.SUBJECTS);
+            container.innerHTML = `
+                <div class="page-header"><h2 class="page-title">Subjects Directory</h2></div>
+                <div class="card">
+                    <table class="table">
+                        <thead><tr><th>Subject Code</th><th>Subject Name</th><th>Class</th><th>Teacher</th></tr></thead>
+                        <tbody>${subjects.map(s => `<tr><td>${s.code}</td><td><b>${s.name}</b></td><td>${s.class}</td><td>${s.teacher}</td></tr>`).join('')}</tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        /* VIEW 6: ATTENDANCE */
+        function renderAttendance(container) {
+            const classes = DB.get(DB_KEYS.CLASSES);
+            const students = DB.get(DB_KEYS.STUDENTS);
+
+            container.innerHTML = `
+                <div class="page-header"><h2 class="page-title">Daily Attendance</h2></div>
+                <div class="card" style="margin-bottom:20px;">
+                    <div class="form-row">
+                        <div class="form-group" style="margin:0;">
+                            <label class="form-label">Select Class</label>
+                            <select id="att-class" class="form-control">
+                                ${classes.map(c => `<option value="${c.name}">${c.name}</option>`).join('')}
+                            </select>
+                        </div>
+                        <div class="form-group" style="margin:0;">
+                            <label class="form-label">Select Date</label>
+                            <input type="date" id="att-date" class="form-control" value="${new Date().toISOString().split('T')[0]}">
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <table class="table">
+                        <thead><tr><th>Student</th><th>Status</th></tr></thead>
+                        <tbody>
+                            ${students.map(s => `
+                                <tr>
+                                    <td>${s.name} (${s.admNo})</td>
+                                    <td>
+                                        <select class="form-control" style="width:120px;">
+                                            <option value="present">Present</option>
+                                            <option value="absent">Absent</option>
+                                            <option value="late">Late</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                    <div style="margin-top:15px;"><button class="btn btn-primary" onclick="showToast('Attendance recorded successfully!')">Save Attendance</button></div>
+                </div>
+            `;
+        }
+
+        /* VIEW 7: EXAMINATIONS & MARKS */
+        function renderExams(container) {
+            container.innerHTML = `
+                <div class="page-header"><h2 class="page-title">Examinations & Marks</h2></div>
+                <div class="card">
+                    <p style="color: var(--text-muted); font-size: 14px;">Select an exam session to record or print report cards.</p>
+                    <table class="table" style="margin-top: 15px;">
+                        <thead><tr><th>Exam Name</th><th>Term</th><th>Class</th><th>Actions</th></tr></thead>
+                        <tbody>
+                            <tr><td>Mid-Term Examination</td><td>Term 1</td><td>Grade 10</td><td><button class="btn btn-primary btn-sm" onclick="window.print()">Print Report Cards</button></td></tr>
+                            <tr><td>Final Examination</td><td>Term 1</td><td>Grade 11</td><td><button class="btn btn-primary btn-sm" onclick="window.print()">Print Report Cards</button></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        /* VIEW 8: FEES & PAYMENTS */
+        function renderFees(container) {
+            const payments = DB.get(DB_KEYS.PAYMENTS);
+            const settings = DB.getObject(DB_KEYS.SETTINGS);
+
+            container.innerHTML = `
+                <div class="page-header">
+                    <h2 class="page-title">Fee Collection</h2>
+                    <button class="btn btn-primary btn-sm" onclick="openPaymentModal()">+ Record Payment</button>
+                </div>
+                <div class="card">
+                    <table class="table">
+                        <thead><tr><th>Receipt No</th><th>Student</th><th>Class</th><th>Amount Paid</th><th>Date</th><th>Method</th><th>Receipt</th></tr></thead>
+                        <tbody>
+                            ${payments.map(p => `
+                                <tr>
+                                    <td><b>${p.receiptNo}</b></td>
+                                    <td>${p.studentName}</td>
+                                    <td>${p.class}</td>
+                                    <td>${settings.currency || '$'}${p.amount}</td>
+                                    <td>${p.date}</td>
+                                    <td>${p.method}</td>
+                                    <td><button class="btn btn-secondary btn-sm" onclick="printReceipt('${p.id}')">Print</button></td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        function openPaymentModal() {
+            const students = DB.get(DB_KEYS.STUDENTS);
+            openModal('Record Fee Payment', `
+                <form onsubmit="savePayment(event)">
+                    <div class="form-group">
+                        <label class="form-label">Student</label>
+                        <select id="p-student" class="form-control">
+                            ${students.map(s => `<option value="${s.id}">${s.name} (${s.class})</option>`).join('')}
+                        </select>
+                    </div>
+                    <div class="form-group"><label class="form-label">Amount Paid</label><input type="number" id="p-amount" class="form-control" required></div>
+                    <div class="form-group">
+                        <label class="form-label">Payment Method</label>
+                        <select id="p-method" class="form-control">
+                            <option value="Cash">Cash</option>
+                            <option value="Bank Transfer">Bank Transfer</option>
+                            <option value="Mobile Money">Mobile Money</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary btn-block">Submit Payment</button>
+                </form>
+            `);
+        }
+
+        function savePayment(e) {
+            e.preventDefault();
+            const students = DB.get(DB_KEYS.STUDENTS);
+            const payments = DB.get(DB_KEYS.PAYMENTS);
+            const stId = document.getElementById('p-student').value;
+            const student = students.find(x => x.id === stId);
+
+            const newPayment = {
+                id: DB.generateId(),
+                receiptNo: 'REC' + Math.floor(1000 + Math.random() * 9000),
+                studentId: stId,
+                studentName: student.name,
+                class: student.class,
+                amount: document.getElementById('p-amount').value,
+                date: new Date().toISOString().split('T')[0],
+                method: document.getElementById('p-method').value
+            };
+
+            payments.push(newPayment);
+            DB.set(DB_KEYS.PAYMENTS, payments);
+            addNotification(`Fee Payment received from ${student.name}`);
+            closeModal();
+            showToast("Payment recorded successfully.");
+            navigate('fees');
+        }
+
+        function printReceipt(id) {
+            const p = DB.get(DB_KEYS.PAYMENTS).find(x => x.id === id);
+            openModal('Payment Receipt', `
+                <div class="printable-area" style="text-align:center; padding: 20px;">
+                    <h3>EduPulse Academy</h3>
+                    <p style="font-size:12px; color:var(--text-muted);">Official Fee Receipt</p>
+                    <hr style="margin: 15px 0;">
+                    <p><strong>Receipt No:</strong> ${p.receiptNo}</p>
+                    <p><strong>Student:</strong> ${p.studentName}</p>
+                    <p><strong>Class:</strong> ${p.class}</p>
+                    <p><strong>Amount Paid:</strong> $${p.amount}</p>
+                    <p><strong>Date:</strong> ${p.date}</p>
+                    <p><strong>Method:</strong> ${p.method}</p>
+                    <button class="btn btn-primary no-print" style="margin-top:20px;" onclick="window.print()">Print Receipt</button>
+                </div>
+            `);
+        }
+
+        /* VIEW 9: USER MANAGEMENT */
+        function renderUsers(container) {
+            const users = DB.get(DB_KEYS.USERS);
+            container.innerHTML = `
+                <div class="page-header">
+                    <h2 class="page-title">User Accounts</h2>
+                    <button class="btn btn-primary btn-sm" onclick="openUserModal()">+ Add User</button>
+                </div>
+                <div class="card">
+                    <table class="table">
+                        <thead><tr><th>Username</th><th>Full Name</th><th>Role</th><th>Status</th></tr></thead>
+                        <tbody>
+                            ${users.map(u => `
+                                <tr>
+                                    <td><b>${u.username}</b></td>
+                                    <td>${u.name}</td>
+                                    <td><span class="status-pill status-excused">${u.role}</span></td>
+                                    <td><span class="status-pill status-${u.status}">${u.status}</span></td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        function openUserModal() {
+            openModal('Add System User', `
+                <form onsubmit="saveUser(event)">
+                    <div class="form-group"><label class="form-label">Username</label><input id="u-username" class="form-control" required></div>
+                    <div class="form-group"><label class="form-label">Password</label><input type="password" id="u-password" class="form-control" required></div>
+                    <div class="form-group"><label class="form-label">Full Name</label><input id="u-name" class="form-control" required></div>
+                    <div class="form-group">
+                        <label class="form-label">Role</label>
+                        <select id="u-role" class="form-control">
+                            <option value="admin">Administrator</option>
+                            <option value="teacher">Teacher</option>
+                            <option value="accountant">Accountant</option>
+                            <option value="student">Student</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary btn-block">Create Account</button>
+                </form>
+            `);
+        }
+
+        function saveUser(e) {
+            e.preventDefault();
+            const users = DB.get(DB_KEYS.USERS);
+            users.push({
+                id: DB.generateId(),
+                username: document.getElementById('u-username').value,
+                password: document.getElementById('u-password').value,
+                name: document.getElementById('u-name').value,
+                role: document.getElementById('u-role').value,
+                status: 'active'
+            });
+            DB.set(DB_KEYS.USERS, users);
+            closeModal();
+            navigate('users');
+        }
+
+        /* VIEW 10: REPORTS */
+        function renderReports(container) {
+            container.innerHTML = `
+                <div class="page-header"><h2 class="page-title">Reports & Analytics</h2></div>
+                <div class="card">
+                    <h3>Export Module Data</h3>
+                    <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px;">Download complete CSV files for system reporting.</p>
+                    <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                        <button class="btn btn-secondary" onclick="exportCSV('students')">Export Students CSV</button>
+                        <button class="btn btn-secondary" onclick="exportCSV('teachers')">Export Teachers CSV</button>
+                        <button class="btn btn-secondary" onclick="exportCSV('payments')">Export Payments CSV</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        /* VIEW 11: SETTINGS & BACKUP */
+        function renderSettings(container) {
+            const settings = DB.getObject(DB_KEYS.SETTINGS);
+
+            container.innerHTML = `
+                <div class="page-header"><h2 class="page-title">Settings & Backup</h2></div>
+                <div class="card" style="margin-bottom: 20px;">
+                    <h3>School Configuration</h3>
+                    <form onsubmit="saveSettings(event)" style="margin-top:15px;">
+                        <div class="form-row">
+                            <div class="form-group"><label class="form-label">School Name</label><input id="set-name" class="form-control" value="${settings.schoolName || ''}"></div>
+                            <div class="form-group"><label class="form-label">Currency Symbol</label><input id="set-curr" class="form-control" value="${settings.currency || '$'}"></div>
+                        </div>
+                        <button class="btn btn-primary">Save Settings</button>
+                    </form>
+                </div>
+
+                <div class="card">
+                    <h3>Backup & Restore</h3>
+                    <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 15px;">Export full system data as JSON backup or restore previously saved data.</p>
+                    <div style="display:flex; gap: 10px;">
+                        <button class="btn btn-success" onclick="exportBackupJSON()">Export JSON Backup</button>
+                        <button class="btn btn-danger" onclick="clearData()">Reset Sample Data</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function saveSettings(e) {
+            e.preventDefault();
+            const settings = DB.getObject(DB_KEYS.SETTINGS);
+            settings.schoolName = document.getElementById('set-name').value;
+            settings.currency = document.getElementById('set-curr').value;
+            DB.set(DB_KEYS.SETTINGS, settings);
+            document.getElementById('brand-name').innerText = settings.schoolName;
+            showToast("Settings updated.");
+        }
+
+        /* BACKUP, CSV & UTILITIES */
+        function exportCSV(type) {
+            let data = DB.get('sms_' + type);
+            if (!data.length) return showToast("No data available to export.");
+            
+            const keys = Object.keys(data[0]);
+            let csv = keys.join(',') + '\n';
+            data.forEach(obj => {
+                csv += keys.map(k => `"${obj[k] || ''}"`).join(',') + '\n';
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${type}_export.csv`;
+            a.click();
+        }
+
+        function exportBackupJSON() {
+            const backup = {};
+            Object.values(DB_KEYS).forEach(k => {
+                backup[k] = localStorage.getItem(k);
+            });
+            const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `edupulse_backup_${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+        }
+
+        function clearData() {
+            if (confirm("Are you sure you want to reset all system data?")) {
+                localStorage.clear();
+                initSampleData();
+                showToast("System re-initialized with sample data.");
+                location.reload();
+            }
+        }
+
+        /* NOTIFICATIONS SYSTEM */
+        function addNotification(msg) {
+            const notifs = DB.get(DB_KEYS.NOTIFS);
+            notifs.unshift({ id: DB.generateId(), message: msg, date: new Date().toLocaleTimeString(), read: false });
+            DB.set(DB_KEYS.NOTIFS, notifs);
+            updateNotifBadge();
+        }
+
+        function updateNotifBadge() {
+            const notifs = DB.get(DB_KEYS.NOTIFS);
+            const unread = notifs.filter(n => !n.read).length;
+            const badge = document.getElementById('notif-badge');
+            if (unread > 0) {
+                badge.innerText = unread;
+                badge.style.display = 'block';
+            } else {
+                badge.style.display = 'none';
+            }
+        }
+
+        function toggleNotifications() {
+            const notifs = DB.get(DB_KEYS.NOTIFS);
+            openModal('Notifications', `
+                <ul style="list-style:none; max-height:300px; overflow-y:auto;">
+                    ${notifs.map(n => `<li style="padding:10px 0; border-bottom:1px solid var(--border);"><div>${n.message}</div><small style="color:var(--text-muted);">${n.date}</small></li>`).join('') || '<li>No notifications</li>'}
+                </ul>
+            `);
+            // Mark all read
+            DB.set(DB_KEYS.NOTIFS, notifs.map(n => ({ ...n, read: true })));
+            updateNotifBadge();
+        }
+
+        /* MODAL UTILITIES */
+        function openModal(title, contentHtml) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-body').innerHTML = contentHtml;
+            document.getElementById('modal-backdrop').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('modal-backdrop').classList.remove('active');
+        }
+
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerText = message;
+            container.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        function togglePasswordVisibility(id) {
+            const input = document.getElementById(id);
+            input.type = input.type === 'password' ? 'text' : 'password';
+        }
+
+        /* INITIALIZATION */
+        window.onload = function() {
+            initSampleData();
+            const savedUser = DB.getObject(DB_KEYS.CURRENT_USER);
+            if (savedUser && savedUser.username) {
+                currentUser = savedUser;
+                loadAppScreen();
+            }
+        };
+
+        // Sidebar Collapse Toggle
+        document.getElementById('sidebar-toggle').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.toggle('collapsed');
+        });
+    </script>
 </body>
 </html>
