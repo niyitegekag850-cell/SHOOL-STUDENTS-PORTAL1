@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="rw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register - learn mathematics online</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#007BFF,#c300ff);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.container{
+    background:greenyellow;
+    padding:30px;
+    width:350px;
+    border-radius:12px;
+    box-shadow:0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+h2{
+    text-align:center;
+    margin-bottom:20px;
+    color:#007BFF;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin:8px 0;
+    border:1px solid hwb(0 80% 20%);
+    border-radius:6px;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    background:#007BFF;
+    color:rgb(255, 255, 255);
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+button:hover{
+    background:#8900b3;
+}
+
+p{
+    text-align:center;
+    margin-top:15px;
+}
+
+a{
+    color:#007BFF;
+    text-decoration:none;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h2>Register</h2>
+
+<form action="register.html" method="GET">
+    <input type="text" name="names" placeholder="Insert your names" required>
+
+    <input type="email" name="email" placeholder="type your e-mail" required>
+
+    <input type="password" name="password" placeholder="Insert your password" required>
+
+    <input type="password" name="confirm" placeholder="Confirm your password" required>
+
+    <button type="submit">Register</button>
+</form>
+
+<p>you have account? <a href="login.html">login here</a></p>
+
+</div>
+
+</body>
+</html>
